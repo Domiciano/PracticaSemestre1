@@ -58,8 +58,8 @@ const action = document.getElementById('action');
 action.addEventListener('click', function(){
     sendMessage(
         {
-            id: '2',
-            name: 'Ma',
+            id: cedula,
+            name: username,
             lat: 3.342330+(Math.random()/1000),
             lng: -76.528577+(Math.random()/1000)
         }
