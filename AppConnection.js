@@ -1,14 +1,23 @@
-var client = new Paho.MQTT.Client('broker.hivemq.com', Number(8884), "webmqttuser1");
-//Listener de mensajes
-client.onMessageArrived = function (msg) {
-    console.log("Arrived!: " + msg.payloadString);
+// Crea un nuevo cliente MQTT
+var host = 'broker.hivemq.com';
+var port = 8884;
+var path = '/mqtt';
+var clientId = 'icesiclient';
+var client = new Paho.MQTT.Client(host, port, path, clientId);
+var connectOptions = {
+    timeout: 30,
+    cleanSession: true,
+    useSSL: true,
+    onSuccess: suscribe
+};
+
+
+client.connect(connectOptions);
+
+function suscribe(){  
+    console.log("connected")  
+    client.subscribe("icesi/introtel");
 }
-client.connect({
-    onSuccess: function () {
-        console.log("conectado!")
-        client.subscribe("icesi/introtel");
-    }
-});
 
 function sendMessage(message) {
     if(client.isConnected()){
