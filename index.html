@@ -46,7 +46,7 @@
             console.log("Error al obtener la ubicación: " + error.message);
         }
 
-        alert('Pidiendo permisos');
+        
 
 
         navigator.geolocation.getCurrentPosition(
@@ -67,17 +67,15 @@
             alert("state: " + result.state);
             console.log(result);
             if (result.state === "granted") {
-                alert('Granted');
-                // Obtiene la ubicación del dispositivo y actualiza el marcador
-                navigator.geolocation.watchPosition(updateLocation, handleLocationError, { enableHighAccuracy: true });
+                
             } else if (result.state === "denied") {
-                alert('Denied');
                 console.log("Location permission denied");
             } else {
-                alert('Location permission prompt not yet shown');
                 console.log("Location permission prompt not yet shown");
             }
         });
+        
+        navigator.geolocation.watchPosition(updateLocation, handleLocationError, { enableHighAccuracy: true });
 
         
 
