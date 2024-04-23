@@ -11,12 +11,12 @@ var connectOptions = {
     onSuccess: suscribe
 };
 
-
 client.connect(connectOptions);
 
 function suscribe(){  
     console.log("connected")  
     client.subscribe("icesi/introtel");
+    console.log("suscribed");
 }
 
 function sendMessage(message) {
