@@ -41,7 +41,7 @@ navigator.permissions.query({ name: "geolocation" }).then(function(result) {
 var userMap = {};
 
 client.onMessageArrived = function(msg){
-    console.log(msg.payloadString);
+    alert(msg.payloadString);
     let locationUpdate = JSON.parse(msg.payloadString);
     console.log(locationUpdate);
 
