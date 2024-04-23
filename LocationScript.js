@@ -68,6 +68,6 @@ action.addEventListener('click', function(){
 });
 
 client._setOnConnectionLost(function(response) {
-    console.log('Conexión perdida:', response.errorMessage);
+    alert('Conexión perdida:', response.errorMessage);
     client.connect(connectOptions);
 });
