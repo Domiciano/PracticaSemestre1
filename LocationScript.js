@@ -69,5 +69,5 @@ action.addEventListener('click', function(){
 
 client._setOnConnectionLost(function(response) {
     console.log('Conexión perdida:', response.errorMessage);
-    // Aquí puedes llamar a funciones de reconexión u otras acciones necesarias
+    client.connect(connectOptions);
 });
