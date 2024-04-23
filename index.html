@@ -49,6 +49,9 @@
         alert('Pidiendo permisos');
         //Permisos
         navigator.permissions.query({ name: "geolocation" }).then(function(result) {
+            alert("name: " + result.name);
+            alert("state: " + result.state);
+            console.log(result);
             if (result.state === "granted") {
                 alert('Granted');
                 // Obtiene la ubicación del dispositivo y actualiza el marcador
