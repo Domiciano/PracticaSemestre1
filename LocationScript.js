@@ -42,12 +42,13 @@ var userMap = {};
 client.onMessageArrived = function(msg){
     console.log(msg.payloadString);
     let locationUpdate = JSON.parse(msg.payloadString);
-    var marker = L.marker([locationUpdate.lat, locationUpdate.lng]).addTo(map);
-    marker.bindPopup(locationUpdate.name);
-
+    
     if(userMap[locationUpdate.id]){
         userMap[locationUpdate.id].setLatLng([locationUpdate.latitude, locationUpdate.longitude]);
+        userMap[locationUpdate.id].bindPopup(locationUpdate.name)
     }else{
+        var marker = L.marker([locationUpdate.lat, locationUpdate.lng]).addTo(map);
         userMap[locationUpdate.id] = marker;
+        marker.bindPopup(locationUpdate.name);
     }
 }
