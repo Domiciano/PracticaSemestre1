@@ -2,7 +2,7 @@
 var host = 'broker.emqx.io';
 var port = 8084;
 var path = '/mqtt';
-var clientId = 'icesiclient';
+var clientId = cedula;
 var client = new Paho.MQTT.Client(host, port, path, clientId);
 var connectOptions = {
     useSSL: true,
