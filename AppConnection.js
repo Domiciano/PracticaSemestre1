@@ -1,12 +1,10 @@
 // Crea un nuevo cliente MQTT
-var host = 'broker.hivemq.com';
-var port = 8884;
+var host = 'broker.emqx.io';
+var port = 8084;
 var path = '/mqtt';
 var clientId = 'icesiclient';
 var client = new Paho.MQTT.Client(host, port, path, clientId);
 var connectOptions = {
-    timeout: 30,
-    cleanSession: true,
     useSSL: true,
     onSuccess: suscribe
 };
