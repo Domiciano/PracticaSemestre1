@@ -34,8 +34,8 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         let cedula = window.localStorage.getItem('cedula');
-        let name = window.localStorage.getItem('name');
-        if(cedula === null || name === null){
+        let username = window.localStorage.getItem('name');
+        if(cedula === null || username === null){
             location.href = 'login.html';
         }
     </script>
