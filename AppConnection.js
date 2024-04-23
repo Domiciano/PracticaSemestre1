@@ -1,4 +1,4 @@
-var client = new Paho.MQTT.Client('broker.hivemq.com', Number(8000), "webmqttuser1");
+var client = new Paho.MQTT.Client('broker.hivemq.com', Number(8884), "webmqttuser1");
 //Listener de mensajes
 client.onMessageArrived = function (msg) {
     console.log("Arrived!: " + msg.payloadString);
