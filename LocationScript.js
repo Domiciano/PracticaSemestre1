@@ -14,14 +14,12 @@ navigator.geolocation.watchPosition(updateLocation, handleLocationError, { enabl
 // Función para actualizar la posición del marcador con los datos de ubicación proporcionados por el navegador
 function updateLocation(position) {
     var latlng = [position.coords.latitude, position.coords.longitude]; 
-    /*
     sendMessage({
         id: cedula,
         name: username,
         lat: latlng[0],
         lng: latlng[1]
     });
-    */
 }
 // Función para manejar errores en la geolocalización
 function handleLocationError(error) {
@@ -54,19 +52,25 @@ client.onMessageArrived = function(msg){
     }
 }
 
-const action = document.getElementById('action');
-action.addEventListener('click', function(){
-    sendMessage(
-        {
-            id: cedula,
-            name: username,
-            lat: 3.342330+(Math.random()/1000),
-            lng: -76.528577+(Math.random()/1000)
-        }
-    );
-});
+
 
 client._setOnConnectionLost(function(response) {
     alert('Conexión perdida:', response.errorMessage);
     client.connect(connectOptions);
 });
+
+
+function initialize(){
+    let initPoint = {
+        id: cedula,
+        name: username,
+        lat: 3.341520+((Math.random()-0.5)/1000),
+        lng: -76.530042+((Math.random()-0.5)/1000)
+    }
+    sendMessage(
+        initPoint
+    );
+    map.setView([initPoint.lat,initPoint.lng],18)
+}
+
+initialize();
