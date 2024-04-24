@@ -6,7 +6,10 @@ var clientId = cedula;
 var client = new Paho.MQTT.Client(host, port, path, clientId);
 var connectOptions = {
     useSSL: true,
-    onSuccess: suscribe
+    onSuccess: suscribe,
+    onFailure: function(){
+        location.href = 'index.html'
+    }
 };
 
 client.connect(connectOptions);

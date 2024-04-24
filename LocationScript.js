@@ -44,7 +44,6 @@ client.onMessageArrived = function(msg){
 
     if(!userMap[locationUpdate.id]){
         console.log("El punto no existe");
-
         userMap[locationUpdate.id] = L.marker([locationUpdate.lat, locationUpdate.lng]).addTo(map);
         userMap[locationUpdate.id].bindPopup(locationUpdate.name);
     }else{
