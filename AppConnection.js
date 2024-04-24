@@ -1,5 +1,5 @@
 // Crea un nuevo cliente MQTT
-var host = 'broker.emqx.io';
+var host = broker;
 var port = 8084;
 var path = '/mqtt';
 var clientId = cedula;
@@ -16,14 +16,14 @@ client.connect(connectOptions);
 
 function suscribe(){  
     console.log("connected")  
-    client.subscribe("icesi/introtel");
+    client.subscribe(topic);
     console.log("suscribed");
 }
 
 function sendMessage(message) {
     if(client.isConnected()){
         message = new Paho.MQTT.Message(JSON.stringify(message));
-        message.destinationName = "icesi/introtel";
+        message.destinationName = topic;
         client.send(message);
     }
 };

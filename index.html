@@ -58,7 +58,9 @@
         let cedula = window.localStorage.getItem('cedula');
         let username = window.localStorage.getItem('name');
         let topic = window.localStorage.getItem('topic');
-        if(cedula === null || username === null){
+        let broker = window.localStorage.getItem('broker');
+
+        if(cedula === null || username === null || topic === null || broker === null){
             location.href = 'login.html';
         }
         document.getElementById('action').addEventListener('click',function(){
