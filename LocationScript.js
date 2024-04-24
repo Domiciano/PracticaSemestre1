@@ -46,7 +46,7 @@ client.onMessageArrived = function(msg){
 
         if(cedula === locationUpdate.id){
             userMap[locationUpdate.id] = L.marker([locationUpdate.lat, locationUpdate.lng],{icon: L.icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png'
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png'
             })}).addTo(map);
         }else{
             userMap[locationUpdate.id] = L.marker([locationUpdate.lat, locationUpdate.lng],{icon: L.icon({
