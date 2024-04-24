@@ -33,6 +33,14 @@
             height: 3rem;
             width: 8rem;
         }
+        #confg{
+            position: absolute;
+            z-index: 2;
+            right: 1rem;
+            top: 1rem;
+            height: 3rem;
+            width: 8rem;
+        }
     </style>
 </head>
 <body>
@@ -41,6 +49,7 @@
 
     <button class="btn btn-danger" id="action">Salir</button>
     <button class="btn btn-primary" id="follow">Sígueme</button>
+    <button class="btn btn-primary" id="config">Configuración</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
     <!-- Incluye las bibliotecas de Leaflet -->
@@ -54,6 +63,9 @@
         }
         document.getElementById('action').addEventListener('click',function(){
             location.href = "login.html";
+        });
+        document.getElementById('config').addEventListener('click',function(){
+            location.href = "config.html";
         });
         
     </script>
