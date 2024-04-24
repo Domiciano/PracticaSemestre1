@@ -12,6 +12,7 @@ navigator.geolocation.watchPosition(updateLocation, handleLocationError, { enabl
 
 // Función para actualizar la posición del marcador con los datos de ubicación proporcionados por el navegador
 function updateLocation(position) {
+    console.log('Nuevo dato de GPS');
     latlng = [position.coords.latitude, position.coords.longitude]; 
     sendMessage({
         id: cedula,
