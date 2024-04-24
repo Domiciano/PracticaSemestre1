@@ -45,16 +45,7 @@ client.onMessageArrived = function(msg){
     if(!userMap[locationUpdate.id]){
         console.log("El punto no existe");
 
-        if(cedula === locationUpdate.id){
-            userMap[locationUpdate.id] = L.marker([locationUpdate.lat, locationUpdate.lng],{icon: L.icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png'
-            })}).addTo(map);
-        }else{
-            userMap[locationUpdate.id] = L.marker([locationUpdate.lat, locationUpdate.lng],{icon: L.icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png'
-            })}).addTo(map);
-        }
-
+        userMap[locationUpdate.id] = L.marker([locationUpdate.lat, locationUpdate.lng]).addTo(map);
         userMap[locationUpdate.id].bindPopup(locationUpdate.name);
     }else{
         console.log("El punto ya existe");
