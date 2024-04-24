@@ -1,5 +1,6 @@
 // Inicializa el mapa
 var map = L.map('map').setView([3.341722, -76.529894], 18);
+var latlng = [];
         
 // Agrega una capa de OpenStreetMap al mapa
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,13 +8,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-
-
 navigator.geolocation.watchPosition(updateLocation, handleLocationError, { enableHighAccuracy: true });
 
 // Función para actualizar la posición del marcador con los datos de ubicación proporcionados por el navegador
 function updateLocation(position) {
-    var latlng = [position.coords.latitude, position.coords.longitude]; 
+    latlng = [position.coords.latitude, position.coords.longitude]; 
     sendMessage({
         id: cedula,
         name: username,
@@ -55,8 +54,8 @@ client.onMessageArrived = function(msg){
 
 
 client._setOnConnectionLost(function(response) {
-    alert('Conexión perdida:', response.errorMessage);
-    client.connect(connectOptions);
+    console.log('Conexión perdida:', response.errorMessage);
+    //location.href = 'index.html';
 });
 
 
@@ -67,10 +66,11 @@ function initialize(){
         lat: 3.341520+((Math.random()-0.5)/1000),
         lng: -76.530042+((Math.random()-0.5)/1000)
     }
+    latlng = [initPoint.lat, initPoint.lng]; 
     sendMessage(
         initPoint
     );
     map.setView([initPoint.lat,initPoint.lng],18)
 }
 
-initialize();
+setTimeout(initialize, 3000);
