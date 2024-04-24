@@ -56,7 +56,7 @@ client.onMessageArrived = function(msg){
 
 client._setOnConnectionLost(function(response) {
     console.log('Conexión perdida:', response.errorMessage);
-    //location.href = 'index.html';
+    location.href = 'index.html';
 });
 
 
