@@ -59,10 +59,10 @@
         let username = window.localStorage.getItem('name');
         let topic = window.localStorage.getItem('topic');
         let broker = window.localStorage.getItem('broker');
-
         if(cedula === null || username === null || topic === null || broker === null){
             location.href = 'login.html';
         }
+        
         document.getElementById('action').addEventListener('click',function(){
             location.href = "login.html";
         });

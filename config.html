@@ -35,6 +35,7 @@
     if(cedula === null || username === null || topic === null || broker === null){
         location.href = 'login.html';
     }
+    
     const brokerInput = document.getElementById('brokerInput');
     brokerInput.value = window.localStorage.getItem("broker");
 
