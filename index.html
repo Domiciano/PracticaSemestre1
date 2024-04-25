@@ -100,7 +100,9 @@
                     map.setView(latlng, 18);
                 }
             });
-            client._setOnConnectionLost(runApp);
+            client._setOnConnectionLost(()=>{
+                runApp(map);
+            });
         }
 
         function onMessageArrived(map){
