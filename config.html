@@ -94,13 +94,19 @@
     });
 
     subButton.addEventListener('click', function () {
-      connect();
+      if(subButton.innerHTML === 'Subscribe'){
+        connect();
+      }else{
+        location.href = 'config.html';
+      }
     });
 
   }
 
   function connect() {
-    console.log("...");
+    subButton.innerHTML = "Disconnect";
+    subButton.classList.remove('btn-primary');
+    subButton.classList.add('btn-danger');
     var host = brokerInput.value;
     var port = 8084;
     var path = '/mqtt';
