@@ -1,26 +1,35 @@
 // Crea un nuevo cliente MQTT
-var host = broker;
-var port = 8084;
-var path = '/mqtt';
-var clientId = cedula;
-var client = new Paho.MQTT.Client(host, port, path, clientId);
-var connectOptions = {
-    useSSL: true,
-    onSuccess: suscribe,
-    onFailure: function(){
-        location.href = 'index.html'
-    }
-};
-
-client.connect(connectOptions);
-
-function suscribe(){  
-    console.log("connected")  
-    client.subscribe(topic);
-    console.log("suscribed");
+function connectToBroker(host, port, path, id){
+    return new Promise(function(resolve, reject){
+        var client = new Paho.MQTT.Client(host, port, path, id);
+        var connectOptions = {
+            useSSL: true,
+            onSuccess: function(){
+                console.log(`connected to ${host}:${port}/${path} with id ${id}`);
+                resolve(client);
+            },
+            onFailure: function(){
+                reject();
+            }
+        };
+        client.connect(connectOptions);
+    });
 }
 
-function sendMessage(message) {
+function suscribeToTopic(client, topic){
+    return new Promise(function(resolve, reject){
+        client.subscribe(topic, {
+            onSuccess: function(){
+                resolve();
+            },
+            onFailure: function(){
+                reject();
+            }
+        }); 
+    });
+}
+
+function sendMessage(client, message) {
     if(client.isConnected()){
         message = new Paho.MQTT.Message(JSON.stringify(message));
         message.destinationName = topic;

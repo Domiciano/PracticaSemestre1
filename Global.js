@@ -1,0 +1,2 @@
+var userMap = {};
+var latlng = [];
