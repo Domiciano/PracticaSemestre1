@@ -101,6 +101,7 @@
                 }
             });
             client._setOnConnectionLost(()=>{
+                document.getElementById('follow').innerHTML = "Sigueme.";
                 runApp(map);
             });
         }
