@@ -71,7 +71,10 @@
         <div class="card">
             <div id="responseContainer" class="card-body text-wrap text-break"></div>
         </div>
-
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 </body>
 <script>
@@ -120,7 +123,9 @@
         let url = pokemonInput.value;
         let agent = window.navigator.userAgent;
         let method = methodselector.value;
-        
+        let bodyReq = bodyTA.value;
+        bodyReq = bodyReq.replace("”",`"`).replace("'",`"`)
+        bodyTA.value = bodyReq;
         
         let response = null;
         if(method !== 'GET'){ 
@@ -129,9 +134,9 @@
                     'User-Agent':agent
                 },
                 method: method,
-                body: bodyTA.value
+                body: bodyReq
             });
-            requestContainer.innerHTML = "URL: "+url+"<br>"+"Method: "+method+"<br><br>"+"<h5>Headers</h5>User-Agent: "+agent+"<br><br>Content-Type: application/json<br><br><h5>Body</h5>"+bodyTA.value;
+            requestContainer.innerHTML = "URL: "+url+"<br>"+"Method: "+method+"<br><br>"+"<h5>Headers</h5>User-Agent: "+agent+"<br><br>Content-Type: application/json<br><br><h5>Body</h5>"+bodyReq;
         }else{
             response = await fetch(url,{
                 headers:{
