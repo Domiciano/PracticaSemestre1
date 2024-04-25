@@ -85,7 +85,7 @@
 
         async function runApp(map) {
             console.log("running app...")
-            //queryPermission();
+            queryPermission();
             var client = await connectToBroker(broker, 8084, '/mqtt', cedula);
             
             await suscribeToTopic(client, topic);
