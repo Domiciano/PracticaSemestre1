@@ -35,11 +35,6 @@ function handleLocationError(error) {
     console.log("Error al obtener la ubicación: " + error.message);
 }
 
-function reconnect(response) {
-    console.log('Conexión perdida:', response.errorMessage);
-    location.href = 'index.html';
-};
-
 function getInitPoint(sendPoint) {
     let initPoint = {
         id: cedula,

@@ -75,13 +75,19 @@
                 location.href = "config.html";
             });
 
-            runApp();
+            loadMap();
         }
 
-        async function runApp() {
-            //queryPermission();
+        async function loadMap(){
             var map = await installMap();
+            await runApp(map);
+        }
+
+        async function runApp(map) {
+            console.log("running app...")
+            //queryPermission();
             var client = await connectToBroker(broker, 8084, '/mqtt', cedula);
+            
             await suscribeToTopic(client, topic);
             getInitPoint((location) => {
                 map.setView([location.lat, location.lng], 18);
@@ -94,7 +100,7 @@
                     map.setView(latlng, 18);
                 }
             });
-            client._setOnConnectionLost(reconnect);
+            client._setOnConnectionLost(runApp);
         }
 
         function onMessageArrived(map){

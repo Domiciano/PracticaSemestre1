@@ -29,10 +29,13 @@ function suscribeToTopic(client, topic){
     });
 }
 
+function reconnect(response) {
+    console.log('Conexión perdida:', response.errorMessage);
+    location.href = 'index.html';
+}
+
 function sendMessage(client, message) {
-    if(client.isConnected()){
         message = new Paho.MQTT.Message(JSON.stringify(message));
         message.destinationName = topic;
         client.send(message);
-    }
 };
