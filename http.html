@@ -58,6 +58,13 @@
             <label id="bodylabel" for="bodyTA" style="width: 100%;">Body</label>
             <textarea class="form-control" id="bodyTA" rows="3"></textarea>
             <br>
+            <div class="simplerow" id="alphabet">
+                <button id="keyA" class="btn btn-primary">{</button>
+                <button id="keyB" class="btn btn-primary">}</button>
+                <button id="keyC" class="btn btn-primary">:</button>
+                <button id="keyD" class="btn btn-primary">"</button>
+            </div>
+            <br>
             <button id="searchButton" type="submit" class="btn btn-primary">Request</button>
         </div>
 
@@ -89,8 +96,20 @@
     const firebasebutton = document.getElementById('firebasebutton');
     const bodylabel = document.getElementById('bodylabel');
     const bodyTA = document.getElementById('bodyTA');
+    const alphabet = document.getElementById('alphabet');
+    const keyA = document.getElementById('keyA');
+    const keyB = document.getElementById('keyB');
+    const keyC = document.getElementById('keyC');
+    const keyD = document.getElementById('keyD');
+
+    keyA.addEventListener('click', ()=>{bodyTA.value+=`{`;bodyTA.focus();bodyTA.setSelectionRange(bodyTA.value.length, bodyTA.value.length);});
+    keyB.addEventListener('click', ()=>{bodyTA.value+=`}`;bodyTA.focus();bodyTA.setSelectionRange(bodyTA.value.length, bodyTA.value.length);});
+    keyC.addEventListener('click', ()=>{bodyTA.value+=`:`;bodyTA.focus();bodyTA.setSelectionRange(bodyTA.value.length, bodyTA.value.length);});
+    keyD.addEventListener('click', ()=>{bodyTA.value+=`"`;bodyTA.focus();bodyTA.setSelectionRange(bodyTA.value.length, bodyTA.value.length);});
+
     bodylabel.style.display = 'none';
     bodyTA.style.display = 'none';
+    alphabet.style.display = 'none';
     
     pokemonInput.value = 'https://pokeapi.co/api/v2/pokemon/';
     pokemonName.innerHTML = "¿Cuál es este pokemon?";
@@ -112,9 +131,11 @@
         if(methodselector.value === 'GET'){
             bodyTA.style.display = 'none';
             bodylabel.style.display = 'none';
+            alphabet.style.display = 'none';
         }else{
             bodyTA.style.display = 'block';
             bodylabel.style.display = 'block';
+            alphabet.style.display = 'block';
         }
     });
     
@@ -124,8 +145,6 @@
         let agent = window.navigator.userAgent;
         let method = methodselector.value;
         let bodyReq = bodyTA.value;
-        bodyReq = bodyReq.replace("”",`"`).replace("'",`"`)
-        bodyTA.value = bodyReq;
         
         let response = null;
         if(method !== 'GET'){ 
