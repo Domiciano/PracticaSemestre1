@@ -9,58 +9,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        /* Estilo para el contenedor del mapa */
-        #map {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            top: 0;
-            z-index: 1;
-        }
-
+        
         #action {
             position: absolute;
             z-index: 2;
             left: 1rem;
             bottom: 1rem;
             height: 3rem;
-            width: 6rem;
+            width: 5rem;
         }
 
-        #follow {
-            position: absolute;
-            z-index: 2;
-            left: 8rem;
-            bottom: 1rem;
-            height: 3rem;
-            width: 8rem;
-        }
-
-        #config {
-            position: absolute;
-            z-index: 2;
-            right: 1rem;
-            top: 1rem;
-            height: 3rem;
-            width: 8rem;
-        }
     </style>
 </head>
 
 <body>
     <!-- Contenedor donde se mostrará el mapa -->
-    <div id="map"></div>
-    <button class="btn btn-danger" id="action">Console</button>
-    <button class="btn btn-primary" id="follow">Sígueme</button>
-    <button class="btn btn-primary" id="config">Configuración</button>
+    <div class="container-sm mt-3">
+        <h1>Información recibida</h1>
+        <div>Se muestra del más reciente al más antiguo</div>
+        <div id="messagesCont" class="mb-3">
+            
+        </div>
+    </div>
 
+    <button class="btn btn-danger" id="action">Mapa</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="AppConnection.js"></script>
     <script src="LocationScript.js"></script>
     <script src="Global.js"></script>
     <script>
+
+        const messagesCont = document.getElementById('messagesCont');
+
         let cedula = window.localStorage.getItem('cedula');
         let username = window.localStorage.getItem('name');
         let topic = window.localStorage.getItem('topic');
@@ -69,55 +50,33 @@
             location.href = 'login.html';
         } else {
             document.getElementById('action').addEventListener('click', function () {
-                location.href = "mapadvanced.html";
-            });
-            document.getElementById('config').addEventListener('click', function () {
-                location.href = "config.html";
+                location.href = "map.html";
             });
 
             loadMap();
         }
 
         async function loadMap(){
-            var map = await installMap();
-            await runApp(map);
+            await runApp();
         }
 
-        async function runApp(map) {
+        async function runApp() {
             console.log("running app...")
             queryPermission();
-            var client = await connectToBroker(broker, 8084, '/mqtt', cedula);
+            var client = await connectToBroker(broker, 8084, '/mqtt', 'test'+cedula);
             
             await suscribeToTopic(client, topic);
-            /*
-            getInitPoint((location) => {
-                map.setView([location.lat, location.lng], 18);
-                sendMessage(client, location);
-            });
-            */
             observeLocation(onLocationChanged(client));
-            client.onMessageArrived = onMessageArrived(map);
-            document.getElementById('follow').addEventListener('click', function () {
-                if (latlng.length === 2) {
-                    map.setView(latlng, 18);
-                }
-            });
+            client.onMessageArrived = onMessageArrived();
             client._setOnConnectionLost(()=>{
-                document.getElementById('follow').innerHTML = "Sigueme.";
-                runApp(map);
+                runApp();
             });
         }
 
-        function onMessageArrived(map){
+        function onMessageArrived(){
             return (msg) => {
                 let locationUpdate = JSON.parse(msg.payloadString);
-                console.log(locationUpdate);
-                if (!userMap[locationUpdate.id]) {
-                    userMap[locationUpdate.id] = L.marker([locationUpdate.lat, locationUpdate.lng]).addTo(map);
-                    userMap[locationUpdate.id].bindPopup(locationUpdate.name);
-                } else {
-                    userMap[locationUpdate.id].setLatLng([locationUpdate.lat, locationUpdate.lng]);
-                }
+                messagesCont.innerHTML = `<div class="alert alert-primary text-wrap text-break" role="alert">${JSON.stringify(locationUpdate)}</div>` + messagesCont.innerHTML;
             }
         }
         

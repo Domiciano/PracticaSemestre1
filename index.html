@@ -29,9 +29,16 @@
         <br>
         <br>
         <div class="container-sm">
-            Ingresa en MQTT. Un protocolo de tipo Publisher-Subscriber
+            Ingresa en chat MQTT. Una aplicación simple con el protocolo de tipo Publisher-Subscriber
         </div>
-        <button id="mqttBtn" type="button" class="btn btn-primary btn-lg" style="width: 100%;">MQTT</button>
+        <button id="mqttchatBtn" type="button" class="btn btn-primary btn-lg" style="width: 100%;">Chat MQTT</button>
+        <br>
+        <br>
+        <div class="container-sm">
+            Ingresa en mapa MQTT. Una aplicación con el protocolo MQTT de tipo Publisher-Subscriber
+        </div>
+        <button id="mqttBtn" type="button" class="btn btn-primary btn-lg" style="width: 100%;">Mapa MQTT</button>
+        
 
 
     </div>
@@ -39,11 +46,16 @@
 <script>
     const httpBtn = document.getElementById('httpBtn');
     const mqttBtn = document.getElementById('mqttBtn');
+    const mqttchatBtn = document.getElementById('mqttchatBtn');
+    
     httpBtn.addEventListener('click', ()=>{
         location.href = 'http.html';
     });
     mqttBtn.addEventListener('click', ()=>{
         location.href = 'login.html';
+    });
+    mqttchatBtn.addEventListener('click', ()=>{
+        location.href = 'chat.html';
     });
 </script>
 </html>
