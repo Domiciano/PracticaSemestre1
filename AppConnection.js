@@ -31,7 +31,7 @@ function suscribeToTopic(client, topic){
 
 function reconnect(response) {
     console.log('Conexión perdida:', response.errorMessage);
-    location.href = 'index.html';
+    location.href = 'map.html';
 }
 
 function sendMessage(client, message) {

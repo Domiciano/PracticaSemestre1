@@ -8,18 +8,22 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Ingreso a la APP</h1>
+        <h1>MQTT</h1>
+
+        <div class="container-sm">
+          Ingresa los siguientes datos para comenzar
+        </div>
     
         <form id="cedulaForm">
           <div class="mb-3">
-            <label for="cedulaInput" class="form-label">Cédula</label>
-            <input type="number" class="form-control" id="cedulaInput" placeholder="Ingrese su cédula">
+            <label for="cedulaInput" class="form-label">Código</label>
+            <input type="text" class="form-control" id="cedulaInput" placeholder="Ingrese su código">
 
             <label for="nameInput" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nameInput" placeholder="Ingrese su nombre">
           </div>
     
-          <button id="actionButton" type="submit" class="btn btn-primary">Enviar</button>
+          <button id="actionButton" type="submit" class="btn btn-primary">Ingresar</button>
         </form>
       </div>
 </body>
@@ -31,11 +35,11 @@
 
     actionButton.addEventListener('click', function(e){
         e.preventDefault();
-        window.localStorage.setItem('cedula', cedulaInput.value);
+        window.localStorage.setItem('cedula', 'icesi_map_user'+cedulaInput.value);
         window.localStorage.setItem('name', nameInput.value);
         window.localStorage.setItem('topic', 'icesi/introtel');
         window.localStorage.setItem('broker', 'broker.emqx.io');
-        location.href = 'index.html'
+        location.href = 'map.html'
     });
 </script>
 </html>
